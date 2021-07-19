@@ -98,10 +98,10 @@
 			children = (
 				2922DE8526A32CD400F07020 /* SwiftAsyncAwaitApp.swift */,
 				2922DE8726A32CD400F07020 /* ContentView.swift */,
+				29E8E20B26A5D37600B46E53 /* Service.swift */,
 				2922DEAD26A32D1300F07020 /* AsyncAwaitConcepts */,
 				2922DE8926A32CD800F07020 /* Assets.xcassets */,
 				2922DE8B26A32CD800F07020 /* Preview Content */,
-				29E8E20B26A5D37600B46E53 /* Service.swift */,
 			);
 			path = SwiftAsyncAwait;
 			sourceTree = "<group>";

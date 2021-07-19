@@ -7,11 +7,8 @@
 
 import Foundation
 
-class Service: ObservableObject {
-    
-    @Published private(set) var joke = "Joke appears here"
-    @Published private(set) var isFetching = false
-    
+private actor JokeServiceStore {
+    private var loadedJoke = Joke(value: "")
     private var url: URL { urlComponents.url! }
     
     private var urlComponents: URLComponents {
@@ -22,34 +19,66 @@ class Service: ObservableObject {
         components.setQueryItems(with: ["category": "dev"])
         return components
     }
+    
+    func load() async throws -> Joke {
+        let (data, response) = try await URLSession.shared.data(from: url)
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200   // 1
+        else {
+            throw DownloadError.statusNotOk
+        }
+        guard let decodedResponse = try? JSONDecoder()
+                .decode(Joke.self, from: data) // 2
+        else { throw DownloadError.decoderError }
+        loadedJoke = decodedResponse  // 3
+        return loadedJoke
+    }
+}
+
+class Service: ObservableObject {
+    
+    @Published private(set) var joke = "Joke appears here"
+    @Published private(set) var isFetching = false
+    
+    private let store = JokeServiceStore()
 }
 
 extension Service {
-    func fetchJoke() {
+    func fetchJoke() async throws {
         isFetching = true
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            defer {
-                DispatchQueue.main.async {
-                    self.isFetching = false
-                }
-            }
-            if let data = data, let response = response as? HTTPURLResponse {
-                print(response.statusCode)
-                if let decodedResponse = try? JSONDecoder().decode(Joke.self, from: data) {
-                    DispatchQueue.main.async {
-                        self.joke = decodedResponse.value
-                    }
-                    return
-                }
-            }
-            print("Joke fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-        }
-        .resume()
+        defer { isFetching = false }
+        let loadedJoke = try await store.load()
+        joke = loadedJoke.value
+        
+        
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            defer {
+//                DispatchQueue.main.async {
+//                    self.isFetching = false
+//                }
+//            }
+//            if let data = data, let response = response as? HTTPURLResponse {
+//                print(response.statusCode)
+//                if let decodedResponse = try? JSONDecoder().decode(Joke.self, from: data) {
+//                    DispatchQueue.main.async {
+//                        self.joke = decodedResponse.value
+//                    }
+//                    return
+//                }
+//            }
+//            print("Joke fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+//        }
+//        .resume()
     }
 }
 
 struct Joke: Codable {
     let value: String
+}
+
+enum DownloadError: Error {
+  case statusNotOk
+  case decoderError
 }
 
 extension URLComponents {

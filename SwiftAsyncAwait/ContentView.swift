@@ -17,7 +17,11 @@ struct ContentView: View {
                 .padding(.horizontal)
             VStack {
                 Spacer()
-                Button { jokeService.fetchJoke() } label: {
+                Button {
+                    Task {
+                        try? await jokeService.fetchJoke()
+                      }
+                    } label: {
                     Text("Fetch a joke")
                         .padding(.bottom)
                         .opacity(jokeService.isFetching ? 0 : 1)
