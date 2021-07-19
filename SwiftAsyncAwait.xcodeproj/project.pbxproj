@@ -14,6 +14,7 @@
 		2922DE9726A32CD800F07020 /* SwiftAsyncAwaitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922DE9626A32CD800F07020 /* SwiftAsyncAwaitTests.swift */; };
 		2922DEA126A32CD800F07020 /* SwiftAsyncAwaitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922DEA026A32CD800F07020 /* SwiftAsyncAwaitUITests.swift */; };
 		2922DEB026A32D5200F07020 /* ClosureConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922DEAF26A32D5200F07020 /* ClosureConversion.swift */; };
+		29E8E20C26A5D37600B46E53 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8E20B26A5D37600B46E53 /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		2922DE9C26A32CD800F07020 /* SwiftAsyncAwaitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftAsyncAwaitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2922DEA026A32CD800F07020 /* SwiftAsyncAwaitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftAsyncAwaitUITests.swift; sourceTree = "<group>"; };
 		2922DEAF26A32D5200F07020 /* ClosureConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureConversion.swift; sourceTree = "<group>"; };
+		29E8E20B26A5D37600B46E53 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				2922DEAD26A32D1300F07020 /* AsyncAwaitConcepts */,
 				2922DE8926A32CD800F07020 /* Assets.xcassets */,
 				2922DE8B26A32CD800F07020 /* Preview Content */,
+				29E8E20B26A5D37600B46E53 /* Service.swift */,
 			);
 			path = SwiftAsyncAwait;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2922DE8826A32CD400F07020 /* ContentView.swift in Sources */,
+				29E8E20C26A5D37600B46E53 /* Service.swift in Sources */,
 				2922DEB026A32D5200F07020 /* ClosureConversion.swift in Sources */,
 				2922DE8626A32CD400F07020 /* SwiftAsyncAwaitApp.swift in Sources */,
 			);
