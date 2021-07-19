@@ -44,31 +44,12 @@ class Service: ObservableObject {
 }
 
 extension Service {
+    @MainActor
     func fetchJoke() async throws {
         isFetching = true
         defer { isFetching = false }
         let loadedJoke = try await store.load()
         joke = loadedJoke.value
-        
-        
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            defer {
-//                DispatchQueue.main.async {
-//                    self.isFetching = false
-//                }
-//            }
-//            if let data = data, let response = response as? HTTPURLResponse {
-//                print(response.statusCode)
-//                if let decodedResponse = try? JSONDecoder().decode(Joke.self, from: data) {
-//                    DispatchQueue.main.async {
-//                        self.joke = decodedResponse.value
-//                    }
-//                    return
-//                }
-//            }
-//            print("Joke fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-//        }
-//        .resume()
     }
 }
 
