@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JokeService: ObservableObject {
+class Service: ObservableObject {
     
     @Published private(set) var joke = "Joke appears here"
     @Published private(set) var isFetching = false
@@ -24,7 +24,7 @@ class JokeService: ObservableObject {
     }
 }
 
-extension JokeService {
+extension Service {
     func fetchJoke() {
         isFetching = true
         URLSession.shared.dataTask(with: url) { data, response, error in

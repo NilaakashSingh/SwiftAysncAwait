@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var jokeService = Service()
+    
     var body: some View {
-        AsyncImage(url: URL(string: "https://files.betamax.raywenderlich.com/attachments/collections/194/e12e2e16-8e69-432c-9956-b0e40eb76660.png")) { image in
-          image.resizable()
-        } placeholder: {
-          Color.red
+        ZStack {
+            Text(jokeService.joke)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+            VStack {
+                Spacer()
+                Button { jokeService.fetchJoke() } label: {
+                    Text("Fetch a joke")
+                        .padding(.bottom)
+                        .opacity(jokeService.isFetching ? 0 : 1)
+                        .overlay {
+                            if jokeService.isFetching { ProgressView() }
+                        }
+                }
+            }
         }
-        .frame(width: 252, height: 252)
     }
 }
 
